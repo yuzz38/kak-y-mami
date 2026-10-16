@@ -200,8 +200,8 @@ section{padding-block:clamp(56px,9vw,110px)}
 .reviews{background:var(--ink);color:var(--bg)}
 .reviews .h2{color:var(--bg)}
 .reviews .note{color:var(--pink)}
-.slider-nav{display:flex;gap:10px}
-.arrow{width:54px;height:54px;border-radius:50%;border:2px solid var(--bg);background:transparent;color:var(--bg);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
+.slider-nav{display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,28px);margin-top:28px}
+.arrow{flex:none;width:54px;height:54px;border-radius:50%;border:2px solid var(--bg);background:transparent;color:var(--bg);cursor:pointer;display:grid;place-items:center;transition:background .2s,color .2s}
 .arrow:hover{background:var(--bg);color:var(--ink)}
 .arrow svg{width:22px;height:22px}
 .track{display:flex;gap:18px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:6px;overscroll-behavior-x:contain}
@@ -213,27 +213,22 @@ section{padding-block:clamp(56px,9vw,110px)}
 .rev .ava{width:44px;height:44px;border-radius:50%;background:var(--band);color:var(--on-band);display:grid;place-items:center;font:900 16px var(--display);flex:none}
 .rev footer b{display:block;font-size:15px}
 .rev footer small{color:var(--muted);font-size:13px}
-.dots-nav{display:flex;justify-content:center;gap:8px;margin-top:26px;flex-wrap:wrap}
+.dots-nav{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;min-width:0}
 .dots-nav button{width:10px;height:10px;border-radius:999px;border:0;padding:0;background:var(--bg);opacity:.3;cursor:pointer;transition:width .3s,opacity .3s}
 .dots-nav button[aria-current="true"]{width:30px;opacity:1;background:var(--pink)}
 @media (max-width:1000px){.rev{flex-basis:calc((100% - 18px)/2)}}
 @media (max-width:640px){.rev{flex-basis:86%}}
 
 /* contacts */
-.contact{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(24px,4vw,50px);align-items:stretch}
-.contact-card{display:grid;gap:22px;align-content:start}
+.contact{display:block}
+.contact-card{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px clamp(24px,4vw,50px);align-content:start}
+.contact-card .messengers{grid-column:1/-1}
+@media (max-width:640px){.contact-card{grid-template-columns:1fr}}
 .c-line{display:grid;gap:2px;padding-bottom:16px;border-bottom:1.5px solid var(--line)}
 .c-line small{color:var(--muted);font-size:13px;letter-spacing:.06em;text-transform:uppercase;font-weight:600}
 .c-line a,.c-line span{font:700 clamp(20px,2.4vw,26px)/1.25 var(--display);text-decoration:none;overflow-wrap:anywhere}
 .c-line a:hover{color:var(--accent)}
 .messengers{display:flex;flex-wrap:wrap;gap:10px}
-.map{position:relative;border-radius:var(--r);overflow:hidden;min-height:420px;background:var(--band);border:1.5px solid var(--line)}
-.map iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.map svg{position:absolute;inset:0;width:100%;height:100%}
-.map .map-link{position:absolute;left:16px;bottom:16px;right:16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;background:var(--surface);color:var(--ink);padding:14px 18px;border-radius:16px;box-shadow:var(--shadow)}
-.map .map-link b{font-family:var(--display);font-size:15px}
-.map .map-link a{font-weight:600;color:var(--accent)}
-@media (max-width:900px){.contact{grid-template-columns:1fr}.map{min-height:340px}}
 
 footer.site{border-top:1.5px solid var(--line);padding-block:30px calc(30px + env(safe-area-inset-bottom,0px))}
 footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px 30px;color:var(--muted);font-size:14px}
@@ -461,13 +456,13 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
   <div class="wrap">
     <div class="sec-head">
       <div><h2 class="h2">Отзывы</h2><p class="note">пишут после праздника</p></div>
-      <div class="slider-nav">
-        <button class="arrow" id="prev" aria-label="Предыдущие отзывы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
-        <button class="arrow" id="next" aria-label="Следующие отзывы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
-      </div>
     </div>
     <div class="track" id="track" tabindex="0" aria-label="Отзывы клиентов, листайте"></div>
-    <div class="dots-nav" id="dots" role="group" aria-label="Страницы отзывов"></div>
+    <div class="slider-nav">
+      <button class="arrow" id="prev" aria-label="Предыдущие отзывы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg></button>
+      <div class="dots-nav" id="dots" role="group" aria-label="Страницы отзывов"></div>
+      <button class="arrow" id="next" aria-label="Следующие отзывы"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button>
+    </div>
   </div>
 </section>
 
@@ -487,27 +482,6 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
           <a class="btn btn-line" href="https://t.me/kakumamy_38" target="_blank" rel="noopener">Telegram</a>
           <a class="btn btn-line" href="https://ig.me/m/kakumamy38" target="_blank" rel="noopener">Direct</a>
         </div>
-      </div>
-      <div class="map" id="map">
-        <svg viewBox="0 0 600 420" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-          <rect width="600" height="420" fill="var(--band)"/>
-          <path d="M-20 60 C120 90 160 20 300 70 S520 40 640 90 L640 -20 L-20 -20Z" fill="var(--surface)" opacity=".55"/>
-          <path d="M470 -10 C440 90 520 160 480 250 S520 380 470 440" fill="none" stroke="var(--surface)" stroke-width="34" opacity=".8"/>
-          <g stroke="var(--surface)" stroke-width="6" fill="none" opacity=".9">
-            <path d="M0 150 L600 120"/><path d="M0 250 L600 230"/><path d="M0 340 L600 320"/>
-            <path d="M110 0 L150 420"/><path d="M240 0 L270 420"/><path d="M370 0 L390 420"/>
-          </g>
-          <g stroke="var(--surface)" stroke-width="2.5" fill="none" opacity=".7">
-            <path d="M0 200 L600 175"/><path d="M0 295 L600 275"/><path d="M180 0 L210 420"/><path d="M305 0 L330 420"/><path d="M60 0 L90 420"/>
-          </g>
-          <g transform="translate(300 205)">
-            <circle r="46" fill="var(--accent)" opacity=".18"/>
-            <path d="M0 18 C-14 0 -22 -10 -22 -22 A22 22 0 0 1 22 -22 C22 -10 14 0 0 18Z" fill="var(--accent)"/>
-            <circle cy="-22" r="8" fill="var(--surface)"/>
-          </g>
-          <text x="330" y="185" font-family="Unbounded, Arial, sans-serif" font-weight="900" font-size="22" fill="var(--on-band)">АНГАРСК</text>
-        </svg>
-        <div class="map-link"><b>Ангарск · самовывоз и доставка</b><a href="https://yandex.ru/maps/?ll=103.8885%2C52.5444&z=13&pt=103.8885,52.5444,pm2rdm" target="_blank" rel="noopener">Открыть в Яндекс Картах →</a></div>
       </div>
     </div>
   </div>
@@ -618,14 +592,6 @@ footer.site .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:
   var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(buildDots,150)});
   buildDots();
 
-  /* карта: живая Яндекс-карта на сайте, рисованная — в превью */
-  var framed=true;try{framed=window.self!==window.top}catch(e){framed=true}
-  if(!framed){
-    var f=document.createElement('iframe');
-    f.src='https://yandex.ru/map-widget/v1/?ll=103.8885%2C52.5444&z=13&pt=103.8885%2C52.5444%2Cpm2rdm';
-    f.title='Карта: Ангарск';f.loading='lazy';f.setAttribute('allowfullscreen','');
-    var m=document.getElementById('map');m.insertBefore(f,m.querySelector('.map-link'));
-  }
 
   /* плавающая кнопка прячется у контактов */
   var fab=document.getElementById('fab'), contacts=document.getElementById('contacts');
